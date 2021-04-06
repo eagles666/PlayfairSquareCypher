@@ -25,6 +25,14 @@ void removeSpaces(char key[26])
     } while (i < strlen(key));
 }
 
+void toUpperCase(char key[26])
+{
+    for (int i = 0; i < strlen(key); i++)
+    {
+        key[i] = key[i] - 32;
+    }
+}
+
 int stringHasLetter(char string[26], char letter, int position)
 {
     int containsLetter = 0;
@@ -59,9 +67,9 @@ void deleteUsedLettersInKey(char key[26], char letters[26])
     int i = 0;
     do
     {
-        if (stringHasLetter(key, key[i], strlen(key)) != 0)
+        if (stringHasLetter(key, letters[i], strlen(key)) != 0)
         {
-            leftShift(key, i);
+            leftShift(letters, i);
         }
         else
         {

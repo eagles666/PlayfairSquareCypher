@@ -9,6 +9,22 @@ void leftShift(char string[26], int start)
     }
 }
 
+void removeSpaces(char key[26])
+{
+    int i = 0;
+    do
+    {
+        if (key[i] < 97 || key[i] > 122)
+        {
+            leftShift(key, i);
+        }
+        else
+        {
+            i++;
+        }
+    } while (i < strlen(key));
+}
+
 int stringHasLetter(char string[26], char letter, int position)
 {
     int containsLetter = 0;
@@ -27,7 +43,14 @@ void deleteDuplicatesLettersInKey(char key[26])
     int i = 0;
     do
     {
-        stringHasLetter(key, key[i], i) != 0 ? leftShift(key, i) : i++;
+        if (stringHasLetter(key, key[i], i) != 0)
+        {
+            leftShift(key, i);
+        }
+        else
+        {
+            i++;
+        }
     } while (key[i] != '\0');
 }
 
@@ -36,7 +59,14 @@ void deleteUsedLettersInKey(char key[26], char letters[26])
     int i = 0;
     do
     {
-        stringHasLetter(key, letters[i], strlen(key)) != 0 ? leftShift(letters, i) : i++;
+        if (stringHasLetter(key, key[i], strlen(key)) != 0)
+        {
+            leftShift(key, i);
+        }
+        else
+        {
+            i++;
+        }
     } while (letters[i] != '\0');
 }
 
@@ -72,6 +102,7 @@ void createPlayfairSquare(char playfairSquare[5][5], char key[26])
     deleteDuplicatesLettersInKey(key);
     deleteUsedLettersInKey(key, letters);
     strcat(key, letters);
+
     for (int i = 0; i < strlen(key); i++)
     {
         playfairSquare[i / 5][i % 5] = key[i];

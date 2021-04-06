@@ -9,12 +9,12 @@ void leftShift(char string[26], int start)
     }
 }
 
-void removeSpaces(char key[26])
+void removeNoLettersCharacters(char key[26])
 {
     int i = 0;
     do
     {
-        if (key[i] < 97 || key[i] > 122)
+        if (!((key[i] > 64 && key[i] < 91) || (key[i] > 96 && key[i] < 123)))
         {
             leftShift(key, i);
         }
@@ -29,7 +29,10 @@ void toUpperCase(char key[26])
 {
     for (int i = 0; i < strlen(key); i++)
     {
-        key[i] = key[i] - 32;
+        if (key[i] >= 97 && key[i] <= 122)
+        {
+            key[i] = key[i] - 32;
+        }
     }
 }
 

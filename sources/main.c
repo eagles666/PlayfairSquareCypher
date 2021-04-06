@@ -10,7 +10,8 @@ int main(int argc, char const *argv[])
 
     printf("Saisir clé : ");
     fgets(key, 26, stdin);
-    removeSpaces(key);
+    removeNoLettersCharacters(key);
+    printf("%s\n", key);
     toUpperCase(key);
     printf("%s\n", key);
     createPlayfairSquare(playfairSquare, key);

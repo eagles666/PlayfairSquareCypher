@@ -72,16 +72,9 @@ void createPlayfairSquare(char playfairSquare[5][5], char key[26])
     deleteDuplicatesLettersInKey(key);
     deleteUsedLettersInKey(key, letters);
     strcat(key, letters);
-    int column = 0, row = 0;
     for (int i = 0; i < strlen(key); i++)
     {
-        playfairSquare[column][row] = key[i];
-        row++;
-        if (row == 5)
-        {
-            row = 0;
-            column++;
-        }
+        playfairSquare[i / 5][i % 5] = key[i];
     }
 }
 

@@ -36,6 +36,15 @@ void toUpperCase(char key[26])
     }
 }
 
+void replaceJIntoI(char key[26])
+{
+    for (int i = 0; i < strlen(key); i++)
+    {
+        if (key[i] == 'J')
+            key[i] = 'I';
+    }
+}
+
 int stringHasLetter(char string[26], char letter, int position)
 {
     int containsLetter = 0;
@@ -93,7 +102,6 @@ void createPlayfairSquare(char playfairSquare[5][5], char key[26])
         'G',
         'H',
         'I',
-        'J',
         'K',
         'L',
         'M',
@@ -106,11 +114,16 @@ void createPlayfairSquare(char playfairSquare[5][5], char key[26])
         'T',
         'U',
         'V',
+        'W',
         'X',
         'Y',
         'Z',
     };
+    removeNoLettersCharacters(key);
+    toUpperCase(key);
+    replaceJIntoI(key);
     deleteDuplicatesLettersInKey(key);
+    printf("Cle preparee : %s\n", key);
     deleteUsedLettersInKey(key, letters);
     strcat(key, letters);
 
@@ -122,6 +135,7 @@ void createPlayfairSquare(char playfairSquare[5][5], char key[26])
 
 void printPlayfairSquare(const char playfairSquare[5][5])
 {
+    printf("carre :\n");
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)

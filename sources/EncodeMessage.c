@@ -1,27 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
-void formatMessage(char message[32])
+void appendLetter(char msg[64])
 {
-    if (strlen(message) % 2 != 0)
+    char finalLetter[2];
+    if (strlen(msg) % 2 != 0)
     {
-        message[strlen(message) + 1] = 'X';
+        finalLetter[0] = msg[strlen(msg) - 1] != 'X' ? 'X' : 'Y';
+        strcat(msg, finalLetter);
     }
-
-    int i = 0;
-    do
+}
+void formatMessage(char message[64])
+{
+    for (int i = 0; i < strlen(message); i += 2)
     {
-        if (message[i] == message[i + 1])
+        if (message[i + 1] == message[i])
         {
             message[i + 1] = 'X';
         }
-        else
-        {
-            i = i + 2;
-        }
-    } while (message[i + 1] != '\0');
-
-    // printf("%s\n", message);
+    }
 }
 
 int letterPosition(const char playfairSquare[5][5], char letter)
@@ -41,21 +38,20 @@ int letterPosition(const char playfairSquare[5][5], char letter)
     return letterPosition;
 }
 
-int encodeMessage(char playfairSquare[5][5], char msg[64])
+void encodeMessage(char playfairSquare[5][5], char msg[64])
 {
     removeNoLettersCharacters(msg);
     toUpperCase(msg);
+    printf("Message purge : %s\n", msg);
     replaceJIntoI(msg);
     formatMessage(msg);
-    printf("%s\n", msg);
+    appendLetter(msg);
+    printf("Message prepare : %s\n", msg);
 
     for (int i = 0; i < strlen(msg); i += 2)
     {
-        printf("%c%c\n", msg[i], msg[i + 1]);
         int positionFirstLetter = letterPosition(playfairSquare, msg[i]);
         int positionSecondLetter = letterPosition(playfairSquare, msg[i + 1]);
-        printf("position lettre 1 : %d\nposition lettre 2 : %d\n", positionFirstLetter, positionSecondLetter);
-
         if (positionFirstLetter / 5 == positionSecondLetter / 5)
         {
             msg[i] = positionFirstLetter % 5 != 4 ? playfairSquare[positionFirstLetter / 5][(positionFirstLetter % 5) + 1] : playfairSquare[positionFirstLetter / 5][0];
@@ -64,16 +60,25 @@ int encodeMessage(char playfairSquare[5][5], char msg[64])
 
         else if (positionFirstLetter % 5 == positionSecondLetter % 5)
         {
-            printf("%c -> %c\n", msg[i], positionFirstLetter / 5 != 4 ? playfairSquare[(positionFirstLetter / 5) + 1][positionFirstLetter % 5] : playfairSquare[0][positionFirstLetter % 5]);
             msg[i] = positionFirstLetter / 5 != 4 ? playfairSquare[(positionFirstLetter / 5) + 1][positionFirstLetter % 5] : playfairSquare[0][positionFirstLetter % 5];
-            printf("%c -> %c\n", msg[i + 1], positionSecondLetter / 5 != 4 ? playfairSquare[(positionSecondLetter / 5) + 1][positionSecondLetter % 5] : playfairSquare[0][positionSecondLetter % 5]);
             msg[i + 1] = positionSecondLetter / 5 != 4 ? playfairSquare[(positionSecondLetter / 5) + 1][positionSecondLetter % 5] : playfairSquare[0][positionSecondLetter % 5];
         }
-        /*
         else
         {
-            printf("%c et %c ne sont pas sur la meme ligne ni la meme colonne.\n", msg[i], msg[i + 1]);
+            msg[i] = playfairSquare[positionFirstLetter / 5][positionSecondLetter % 5];
+            msg[i + 1] = playfairSquare[positionSecondLetter / 5][positionFirstLetter % 5];
         }
-        */
     }
 }
+
+void printMessage(char message[64])
+{
+    printf("Message crypte : ");
+    for (int i = 0; i < strlen(message); i += 2)
+    {
+        printf("%c%c ", message[i], message[i + 1]);
+    }
+}
+
+// cle : radio londre
+// msg : Les chants les plus desesperes sont les chants les plus beaux

@@ -3,10 +3,9 @@
 
 void encodeMessage(char playfairSquare[5][5], char message[32])
 {
-    char X[2] = "x";
     if (strlen(message) % 2 != 0)
     {
-        strcat(message, X);
+        message[strlen(message) + 1] = 'X';
     }
 
     int i = 0;
@@ -18,25 +17,26 @@ void encodeMessage(char playfairSquare[5][5], char message[32])
         }
         else
         {
+            i = i + 2;
         }
     } while (message[i + 1] != '\0');
 
-    printf("%s", message);
+    printf("%s\n", message);
 }
 
-int inSameRow(char playfairSquare[5][5], int row, char firstLetter, char secondLetter)
+int letterPosition(const char playfairSquare[5][5], char letter)
 {
-    int hasFirstLetter = 1, hasSecondLetter = 1;
-    for (int column = 0; column > 5; column++)
+    int letterPosition;
+    for (int i = 0; i < 5; i++)
     {
-        if (playfairSquare[column][row] == firstLetter)
+        for (int j = 0; j < 5; j++)
         {
-            hasFirstLetter = 0;
-        }
-        if (playfairSquare[column][row] == secondLetter)
-        {
-            hasSecondLetter = 0;
+            if (playfairSquare[i][j] == letter)
+            {
+                letterPosition = i * 5 + j;
+            }
         }
     }
-    return hasFirstLetter == 0 && hasSecondLetter == 0 ? 0 : 1;
+
+    return letterPosition;
 }

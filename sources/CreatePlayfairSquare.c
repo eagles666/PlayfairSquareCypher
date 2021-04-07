@@ -40,8 +40,10 @@ void replaceJIntoI(char key[26])
 {
     for (int i = 0; i < strlen(key); i++)
     {
-        if (key[i] == 'J')
-            key[i] = 'I';
+        if (key[i] == 74)
+        {
+            key[i] = key[i] - 1;
+        }
     }
 }
 

@@ -9,7 +9,7 @@ void leftShift(char string[26], int start)
     }
 }
 
-void removeNoLettersCharacters(char key[26])
+void removeNoLettersCharacters(char key[32])
 {
     int i = 0;
     do
@@ -25,13 +25,13 @@ void removeNoLettersCharacters(char key[26])
     } while (i < strlen(key));
 }
 
-void toUpperCase(char key[26])
+void toUpperCase(char string[32])
 {
-    for (int i = 0; i < strlen(key); i++)
+    for (int i = 0; i < strlen(string); i++)
     {
-        if (key[i] >= 97 && key[i] <= 122)
+        if (string[i] >= 97 && string[i] <= 122)
         {
-            key[i] = key[i] - 32;
+            string[i] -= 32;
         }
     }
 }

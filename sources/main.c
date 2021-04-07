@@ -16,4 +16,10 @@ int main(int argc, char const *argv[])
     fgets(message, 128, stdin);
     encodeMessage(playfairSquare, message);
     printMessage(message);
+    decodeMessage(playfairSquare, message);
+    printf("\nMessage decrypte : ");
+    for (int i = 0; i < strlen(message); i += 2)
+    {
+        printf("%c%c ", message[i], message[i + 1]);
+    }
 }

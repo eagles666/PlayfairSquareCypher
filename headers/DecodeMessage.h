@@ -1,0 +1,4 @@
+#ifndef PLAYFAIR_DECODE_H
+#define PLAYFAIR_DECODE_H
+
+#endif // PLAYFAIR_DECODE_H

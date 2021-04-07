@@ -10,6 +10,7 @@ void appendLetter(char msg[64])
         strcat(msg, finalLetter);
     }
 }
+
 void formatMessage(char message[64])
 {
     for (int i = 0; i < strlen(message); i += 2)
